@@ -7,4 +7,5 @@ import vn.aptech.backendapi.entities.Doctor;
 
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor, String> {
+
 }
