@@ -16,6 +16,7 @@ import java.time.LocalDate;
 public class Doctor extends BaseEntity {
 
     @Id
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     @Column(name = "fullname")
     private String fullName;

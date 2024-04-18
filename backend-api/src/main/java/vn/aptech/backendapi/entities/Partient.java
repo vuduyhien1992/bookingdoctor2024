@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @Table(name="partients")
 public class Partient extends BaseEntity {
     @Id
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     private  String id;
     @Column(name = "fullname")
     private String fullName;
