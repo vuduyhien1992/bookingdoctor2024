@@ -13,15 +13,17 @@ import vn.aptech.backendapi.service.Doctor.DoctorService;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/doctor")
-@PreAuthorize("hasRole('DOCTOR')")
+@RequestMapping(value = "/api/doctor")
+@PreAuthorize("hasAnyAuthority('DOCTOR')")
 public class DoctorController {
+
+    @Autowired
     private DoctorService doctorService;
 
-    @GetMapping("/all")
+    @GetMapping()
+    //@PreAuthorize("hasAnyAuthority('USER', 'DOCTOR')")
     public ResponseEntity<List<DoctorDto>> findAll() {
         List<DoctorDto> result = doctorService.findAll();
-
         return ResponseEntity.ok(result);
     }
 

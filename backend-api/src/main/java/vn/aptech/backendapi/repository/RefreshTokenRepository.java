@@ -20,4 +20,9 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Inte
 
     @Query("SELECT o FROM RefreshToken o JOIN FETCH o.user u JOIN FETCH u.roles WHERE o.code=:code AND o.available=true")
     Optional<RefreshToken> findRefreshTokenByCode(@Param("code") String code);
+
+    @Query("SELECT rt FROM RefreshToken rt WHERE rt.user.email = :username OR rt.user.phone = :username")
+    Optional<RefreshToken> findRefreshTokenByUsername(@Param("username") String username);
+    //Optional<RefreshToken> findRefreshTokenByUsername(String username);
+
 }
