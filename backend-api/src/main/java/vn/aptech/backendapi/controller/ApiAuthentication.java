@@ -22,7 +22,7 @@ import java.util.Optional;
 
 //Khoa edit 18/04/2024
 @RestController
-@RequestMapping(value = "/api/auth/login")
+@RequestMapping(value = "/api/auth")
 public class ApiAuthentication {
     @Autowired
     private AuthenticationWithUsernameAndKeycodeService service;
@@ -34,7 +34,7 @@ public class ApiAuthentication {
     private RefreshTokenRepository refreshTokenRepository;
 
     // Login
-    @PostMapping
+    @PostMapping("/login")
     public ResponseEntity<Authentication> login(@RequestBody AuthenticationWithUsernameAndKeycode body){
         var session = service.processLogin(body);
         return ResponseEntity.ok(session);

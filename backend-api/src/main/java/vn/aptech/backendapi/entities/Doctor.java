@@ -16,8 +16,8 @@ import java.time.LocalDate;
 public class Doctor extends BaseEntity {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @Column(name = "fullname")
     private String fullName;
     private String title; //Chức danh
