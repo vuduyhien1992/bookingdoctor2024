@@ -43,11 +43,13 @@ public class SecurityConfiguration {
     public void globalConfiguration(AuthenticationManagerBuilder authentication) throws Exception {
         authentication.userDetailsService(authenticationService).passwordEncoder(passwordEncoder());
     }
-
     @Bean
     @Order(1)
     public SecurityFilterChain api(HttpSecurity http) throws Exception {
-        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.POST,"/api/auth/login").injectOn(http);
+        // Khai báo route ở đây
+        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.POST,"/api/auth/**").injectOn(http);
+        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.GET,"/api/doctor/**").injectOn(http);
+        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.GET,"api/user").injectOn(http);
         http.csrf(AbstractHttpConfigurer::disable)
                 .securityMatcher("/api/**")
                 .authorizeHttpRequests(req->req.anyRequest().authenticated())

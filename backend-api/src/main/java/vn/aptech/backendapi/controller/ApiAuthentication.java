@@ -1,13 +1,12 @@
 package vn.aptech.backendapi.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import vn.aptech.backendapi.dto.Authentication;
 import vn.aptech.backendapi.dto.AuthenticationWithUsernameAndKeycode;
 import vn.aptech.backendapi.entities.RefreshToken;
@@ -23,6 +22,7 @@ import java.util.Optional;
 //Khoa edit 18/04/2024
 @RestController
 @RequestMapping(value = "/api/auth")
+@Slf4j
 public class ApiAuthentication {
     @Autowired
     private AuthenticationWithUsernameAndKeycodeService service;
@@ -30,15 +30,19 @@ public class ApiAuthentication {
     @Autowired
     private UserService userService;
 
+
     @Autowired
     private RefreshTokenRepository refreshTokenRepository;
 
     // Login
-    @PostMapping("/login")
+    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Authentication> login(@RequestBody AuthenticationWithUsernameAndKeycode body){
         var session = service.processLogin(body);
         return ResponseEntity.ok(session);
     }
+
+//    @PostMapping("/sign-in")
+//    public ResponseEntity<String> signIn(@@RequestBody )
 
 
     @PostMapping("/send-otp")
@@ -53,7 +57,6 @@ public class ApiAuthentication {
                 RefreshToken refreshToken = refreshTokenOptional.get();
                 LocalDateTime expiredAt = refreshToken.getExpiredAt();
                 LocalDateTime now = LocalDateTime.now();
-
                 // Kiểm tra tính hợp lệ của token
                 if (now.isBefore(expiredAt)) {
                     return ResponseEntity.ok("Token is still valid"); // Token chưa hết hạn, không thực hiện gửi OTP
@@ -61,15 +64,35 @@ public class ApiAuthentication {
                     return ResponseEntity.ok("Token is expired, login successful"); // Token đã hết hạn, thực hiện đăng nhập
                 }
             } else {
+
                 // Nếu không tìm thấy RefreshToken, tạo mã OTP và cập nhật vào User
                 String otp = RandomStringUtils.randomNumeric(6);
-                //Optional<User> userOptional= userService.findByEmailOrPhone(username);
 
                 if (userOptional.isPresent()) {
                     User user = userOptional.get();
                     user.setKeyCode(otp);
                     userService.save(user);
-                    return ResponseEntity.ok("Keycode updated successfully: " + otp); // Gửi mã OTP thành công
+                    return ResponseEntity.ok("Keycode updated successfully: " + otp);
+//                    if(provider.equals("phone")){
+//                        try {
+//
+//                        } catch (Exception e) {
+//                            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                                    .body("Failed to send OTP via SMS");
+//                        }
+////                        twilioOtpService.sendSMS(username, otp);
+////                        user.setKeyCode(otp);
+////                        userService.save(user);
+////                        return ResponseEntity.ok("Keycode updated successfully: " + otp);
+//                    }else {
+//                        // Handle sending OTP via email (implementation required)
+//                        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED)
+//                                .body("Sending OTP via email not implemented yet");
+//                    }
+                    // else{
+                    // Send Otp qua email
+                    // }
+                   //return ResponseEntity.ok("Keycode updated successfully: " + otp); // Gửi mã OTP thành công
                 } else {
                     return ResponseEntity.status(HttpStatus.NOT_FOUND)
                             .body("User not found with identifier: " + username); // Không tìm thấy người dùng

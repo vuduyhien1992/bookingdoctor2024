@@ -1,19 +1,17 @@
 package vn.aptech.backendapi.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import vn.aptech.backendapi.entities.Department;
-import vn.aptech.backendapi.entities.User;
+import vn.aptech.backendapi.entities.Working;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class DoctorDto {
     private String id;
     private String fullName;
@@ -22,5 +20,10 @@ public class DoctorDto {
     private LocalDate birthday; // ngày sinh
     private String address; // Địa chỉ
     private String image; // Image
+    private Double price;
+    private Department department;
+    //private User user;
+    private List<WorkingDto> workings;
+
 
 }

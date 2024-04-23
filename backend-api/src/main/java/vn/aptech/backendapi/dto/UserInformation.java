@@ -9,13 +9,12 @@ import java.util.List;
 
 
 @Getter
-@Setter
-@AllArgsConstructor
 public class UserInformation {
     private final int id;
     private final String email;
     private final String phone;
     private final String fullName;
+    private final String provider;
     private final List<String> roles;
 
     public UserInformation(User user){
@@ -23,6 +22,7 @@ public class UserInformation {
         email = user.getEmail();
         phone = user.getPhone();
         fullName = user.getFullName();
+        provider = user.getProvider();
         roles = user.getAuthorities();
     }
 }
