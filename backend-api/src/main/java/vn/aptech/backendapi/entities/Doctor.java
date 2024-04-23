@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,6 +26,7 @@ public class Doctor extends BaseEntity {
     private LocalDate birthday; // ngày sinh
     private String address; // Địa chỉ
     private String image; // Image
+    private Double price;
 
     @ManyToOne
     @JoinColumn(name = "department_id", referencedColumnName = "id")
@@ -33,4 +35,9 @@ public class Doctor extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Working> workings;
+
+
 }

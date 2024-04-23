@@ -16,7 +16,55 @@ body {
   font-size: 16px;
 }
 
-.navbar {
-  width: 85%;
-  margin: 0 auto;
+.main-app {
+  min-height: 650px;
+}
+
+nav {
+  font-family: "Poppins", sans-serif;
+}
+nav .nav-link {
+  text-decoration: none !important;
+  color: #1d1617;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 10px 30px;
+}
+nav .nav-link:hover {
+  color: #000af7;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #1d1617;
+}
+.logo .logo-span {
+  color: #000af7;
+}
+
+.login {
+  padding: 10px 30px;
+  border: 1.5px solid #000af7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #1d1617;
+}
+.login:hover {
+  background-color: #000af7;
+  color: #fff;
+  font-weight: 500;
+}
+
+.footer .footer__partient {
+  list-style: none !important;
+  line-height: 30px !important;
+}
+.footer .menu__icons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }/*# sourceMappingURL=App.css.map */

@@ -1,5 +1,6 @@
 package vn.aptech.backendapi.service.User;
 
+import vn.aptech.backendapi.dto.UserDto;
 import vn.aptech.backendapi.dto.UserInformation;
 import vn.aptech.backendapi.entities.User;
 
@@ -11,5 +12,7 @@ public interface UserService {
 
     User save(User user);
 
-    List<UserInformation> findAll();
+    List<UserDto> findAll();
+
+    Optional<UserDto> findById(int id);
 }

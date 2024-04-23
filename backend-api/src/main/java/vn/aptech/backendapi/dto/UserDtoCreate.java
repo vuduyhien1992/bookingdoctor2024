@@ -1,2 +1,4 @@
-package vn.aptech.backendapi.dto;public class UserDtoCreate {
+package vn.aptech.backendapi.dto;
+
+public class UserDtoCreate {
 }
