@@ -1,12 +1,12 @@
-import { useState } from 'react'
-import Layout from './components/Layouts/Layout'
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Routers from "./route/Routers";
+
 
 function App() {
-
   return (
-    <>
-      <Layout />
-    </>
+    <Router>
+      <Routers/>
+    </Router>
   )
 }
 

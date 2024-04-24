@@ -1,38 +1,53 @@
 import React from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
-import { Home, Doctor, DoctorDetail, About, Contact, Login, Signup } from '../pages'
-import { UserRouters,DoctorRoutes,AdminRouters } from '../utils'
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { publicRouters, patientRouters, privateRouters, doctorRouters, adminRouters } from './Path';
+import { PatientRouters,DoctorRouters,AdminRouters,PrivateRouters} from './CheckRouters';
+import { Fragment } from "react";
+
 
 const Routers = () => {
-    return (
-        <Routes>
-            //public routes
-            <Route path='/' element={<Navigate to='/home' />} />
-            <Route path='/home' element={<Home />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/contact' element={<Contact />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/signup' element={<Signup />} />
+  return (
+    <Routes>
+      {publicRouters.map((route, index) => {
+        const Layout = route.layout || Fragment;
+        const Page = route.component;
+        return <Route key={index} path={route.path} element={<Layout><Page /></Layout>} />;
+      })}
 
-            //routes for users
-            <Route element={<UserRouters/>}>
-                viết router của users tại đây
-            </Route>
+      <Route element={<PatientRouters />}>
+        {patientRouters.map((route, index) => {
+          const Layout = route.layout || Fragment;
+          const Page = route.component;
+          return <Route key={index} path={route.path} element={<Layout><Page /></Layout>} />;
+        })}
+      </Route>
 
+      <Route element={<PrivateRouters/>}>
+        {privateRouters.map((route, index) => {
+          const Layout = route.layout || Fragment;
+          const Page = route.component;
+          return <Route key={index} path={route.path} element={<Layout><Page /></Layout>} />;
+        })}
+      </Route>
 
-            //routers for doctors
-            <Route element={<DoctorRoutes/>}>
-                <Route path='/doctor' element={<Doctor />} />
-                <Route path='/doctor/{id}' element={<DoctorDetail />} />
-            </Route>
-          
-           
-            //Routers for Admin
-            <Route element={<AdminRouters/>}>
-                // viết route của admin tại đây
-            </Route>
+      <Route element={<DoctorRouters />}>
+        {doctorRouters.map((route, index) => {
+          const Layout = route.layout || Fragment;
+          const Page = route.component;
+          return <Route key={index} path={route.path} element={<Layout><Page /></Layout>} />;
+        })}
+      </Route>
+
+      <Route element={<AdminRouters />}>
+        {adminRouters.map((route, index) => {
+          const Layout = route.layout || Fragment;
+          const Page = route.component;
+          return <Route key={index} path={route.path} element={<Layout><Page /></Layout>} />;
+        })}
+      </Route>
+
     </Routes>
-      )
+  )
 }
 
 export default Routers
