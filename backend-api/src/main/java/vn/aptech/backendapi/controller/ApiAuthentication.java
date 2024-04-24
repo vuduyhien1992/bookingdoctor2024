@@ -52,7 +52,6 @@ public class ApiAuthentication {
         Optional<User> userOptional = userService.findByEmailOrPhone(username);
         if(userOptional.isPresent() && userOptional.get().getProvider().equals(provider)){
             Optional<RefreshToken> refreshTokenOptional = refreshTokenRepository.findRefreshTokenByUsername(username);
-
             if (refreshTokenOptional.isPresent()) {
                 RefreshToken refreshToken = refreshTokenOptional.get();
                 LocalDateTime expiredAt = refreshToken.getExpiredAt();
@@ -64,35 +63,15 @@ public class ApiAuthentication {
                     return ResponseEntity.ok("Token is expired, login successful"); // Token đã hết hạn, thực hiện đăng nhập
                 }
             } else {
-
-                // Nếu không tìm thấy RefreshToken, tạo mã OTP và cập nhật vào User
                 String otp = RandomStringUtils.randomNumeric(6);
-
+                // String otp ="";
                 if (userOptional.isPresent()) {
                     User user = userOptional.get();
-                    user.setKeyCode(otp);
-                    userService.save(user);
+                    if(provider.equals("phone")){
+                        user.setKeyCode(otp);
+                        userService.save(user);
+                    }
                     return ResponseEntity.ok("Keycode updated successfully: " + otp);
-//                    if(provider.equals("phone")){
-//                        try {
-//
-//                        } catch (Exception e) {
-//                            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                                    .body("Failed to send OTP via SMS");
-//                        }
-////                        twilioOtpService.sendSMS(username, otp);
-////                        user.setKeyCode(otp);
-////                        userService.save(user);
-////                        return ResponseEntity.ok("Keycode updated successfully: " + otp);
-//                    }else {
-//                        // Handle sending OTP via email (implementation required)
-//                        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED)
-//                                .body("Sending OTP via email not implemented yet");
-//                    }
-                    // else{
-                    // Send Otp qua email
-                    // }
-                   //return ResponseEntity.ok("Keycode updated successfully: " + otp); // Gửi mã OTP thành công
                 } else {
                     return ResponseEntity.status(HttpStatus.NOT_FOUND)
                             .body("User not found with identifier: " + username); // Không tìm thấy người dùng

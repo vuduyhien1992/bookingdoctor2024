@@ -1,25 +1,38 @@
 import React from 'react'
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <>
-    {/* Khoa edit heder  */}
-        <nav className='navbar'>
-                <div className='header'>
-                    <div className='logo'>Medi<span className='logo-span'>care</span></div>
-                    <div className='linklist'>
-                        <ul className='menu'>
-                            <li className='menu_item'><Link to="/about" className='menu_link'>About Us</Link></li>
-                            <li className='menu_item'><Link to="/booking" className='menu_link'>Booking an appointment</Link></li>
-                            <li className='menu_item'><Link to="/service" className='menu_link'>Service</Link></li>
-                            <li className='menu_item'><Link to="/doctor" className='menu_link'>For Doctor</Link></li>
-                            <li className='menu_item'><Link to="/login" className='menu_link'>Login</Link></li>
-                            <li className='menu_item'><Link to="/signup" className='menu_link'>Sign Up</Link></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+      <nav className="navbar navbar-expand-lg bg-light sticky-top">
+        <div className="container">
+          <Link to="/" className="navbar-brand logo">Medi<span className='logo-span'>care</span></Link>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav ms-auto me-5">
+              <li className="nav-item">
+                <Link to="/" className="nav-link active" aria-current="page">Home</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/about" className="nav-link">About Us</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/booking" className="nav-link">Booking an appointment</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/service" className="nav-link">Service</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/doctor" className="nav-link">For Doctor</Link>
+              </li>
+            </ul>
+            <Link to="/login" className='login'>Login</Link>
+          </div>
+        </div>
+      </nav>
+
     </>
   )
 }
