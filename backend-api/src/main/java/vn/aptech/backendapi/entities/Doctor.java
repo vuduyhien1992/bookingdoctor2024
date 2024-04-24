@@ -28,6 +28,8 @@ public class Doctor extends BaseEntity {
     private String image; // Image
     private Double price;
 
+    private boolean status;
+
     @ManyToOne
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;

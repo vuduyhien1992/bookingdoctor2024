@@ -23,6 +23,7 @@ public class Partient extends BaseEntity {
     private LocalDate birthday; // ngày sinh
     private String address; // Địa chỉ
     private String image; // Image
+    private boolean status;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;

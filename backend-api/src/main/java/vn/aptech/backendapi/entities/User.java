@@ -28,6 +28,8 @@ public class User extends BaseEntity {
     @Column(name="keycode")
     private String keyCode;
     private String provider;
+
+    private boolean status;
     public List<String> getAuthorities(){
         return roles.stream().map(Role::getShortName).toList();
     }

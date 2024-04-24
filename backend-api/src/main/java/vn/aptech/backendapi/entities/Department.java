@@ -16,4 +16,6 @@ public class Department extends BaseEntity {
     private int id;
     private String name;
     private String url;
+
+    private boolean status;
 }
