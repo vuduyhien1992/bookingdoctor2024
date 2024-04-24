@@ -22,7 +22,7 @@ public class DoctorController {
     private DoctorService doctorService;
 
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    //@PreAuthorize("hasAnyAuthority('DOCTOR')")
+    //@PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<List<DoctorDto>> findAll() {
         List<DoctorDto> result = doctorService.findAll();
         return ResponseEntity.ok(result);

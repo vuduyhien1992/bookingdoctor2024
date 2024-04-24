@@ -35,7 +35,7 @@ nav .nav-link:hover {
 }
 
 .logo {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: bold;
   color: #1d1617;
 }
@@ -44,7 +44,7 @@ nav .nav-link:hover {
 }
 
 .login {
-  padding: 10px 30px;
+  padding: 8px 15px;
   border: 1.5px solid #000af7;
   display: flex;
   justify-content: center;

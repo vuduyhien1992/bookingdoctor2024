@@ -5,7 +5,7 @@ function ClientLayout({children}) {
     return (
         <div>
             <Header/>
-            <div className='main-app container'>
+            <div className='main-app'>
                 <div className='content'>{children}</div>
             </div>
             <Footer/>
