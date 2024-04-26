@@ -1,5 +1,5 @@
 import { Outlet, Navigate } from "react-router-dom";
-import getUserData from "./Token";
+import getUserData from "./token/Token";
 
 const AdminRouters = () => {
     if(!getUserData){
