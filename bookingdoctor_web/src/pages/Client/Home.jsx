@@ -1,8 +1,12 @@
 import React from 'react'
 
+import { SeachHome } from '../../components/UI/Home'
+
 const Home = () => {
   return (
-    <h1>Home</h1>
+    <>
+      <SeachHome />
+    </>
   )
 }
 

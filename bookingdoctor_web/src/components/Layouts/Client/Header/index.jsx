@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom";
+import { motion } from 'framer-motion';
 
 const Header = () => {
   return (
@@ -28,7 +29,10 @@ const Header = () => {
                 <Link to="/doctor" className="nav-link">For Doctor</Link>
               </li>
             </ul>
-            <Link to="/login" className='login'>Login</Link>
+            <motion.div whileTap={{ scale: 0.8 }}>
+              <Link to="/login" className='login'>Login</Link>
+            </motion.div>
+
           </div>
         </div>
       </nav>
