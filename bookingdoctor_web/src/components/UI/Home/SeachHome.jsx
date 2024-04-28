@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
 import bg_search_home from '../../../../public/images/bg_home_01.jpg'
 import { MdArrowOutward } from "react-icons/md"
