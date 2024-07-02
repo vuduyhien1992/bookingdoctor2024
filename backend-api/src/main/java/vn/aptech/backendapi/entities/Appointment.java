@@ -1,5 +1,8 @@
 package vn.aptech.backendapi.entities;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,23 +12,30 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="appointments")
-public class Appointment extends BaseEntity  {
+@Table(name = "appointments", uniqueConstraints = {
+        @UniqueConstraint(columnNames = { "scheduledoctor_id", "clinic_hours" })
+})
+public class Appointment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-//    @ManyToOne
-//    @JoinColumn(name="doctor_id", referencedColumnName = "id")
-//    private Doctor doctor;
 
     @ManyToOne
-    @JoinColumn(name="partient_id", referencedColumnName = "id")
+    @JoinColumn(name = "partient_id", referencedColumnName = "id")
     private Partient partient;
 
     @ManyToOne
-    @JoinColumn(name = "schedule_id", referencedColumnName = "id")
-    private Schedule schedule;
-    private Integer price;
+    @JoinColumn(name = "scheduledoctor_id", referencedColumnName = "id")
+    private ScheduleDoctor scheduledoctor;
+    private int price;
     private String payment;
     private String status;
+    private String note;
+    @Column(name = "appointment_date")
+    private LocalDate appointmentDate;
+    @Column(name = "medical_examination_day")
+    private LocalDate medicalExaminationDay;
+    @Column(name = "clinic_hours")
+    private LocalTime clinicHours;
+    private String reason;
 }

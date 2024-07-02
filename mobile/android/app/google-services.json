@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "274561182035",
+    "project_id": "bookingapp-608b5",
+    "storage_bucket": "bookingapp-608b5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274561182035:android:08e47e7e44f7cfe1b5d9a6",
+        "android_client_info": {
+          "package_name": "vn.aptech.mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiyU9YDaaQYs54gQVFjk4rKL8rU4WsOIc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

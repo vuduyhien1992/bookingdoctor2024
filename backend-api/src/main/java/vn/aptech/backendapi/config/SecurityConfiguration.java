@@ -46,26 +46,29 @@ public class SecurityConfiguration {
     @Bean
     @Order(1)
     public SecurityFilterChain api(HttpSecurity http) throws Exception {
-        // Khai báo route ở đây
-        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.POST,"/api/auth/**").injectOn(http);
-        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.GET,"/api/doctor/**").injectOn(http);
-        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.GET,"api/user").injectOn(http);
-        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.GET,"/api/slot/**").injectOn(http);
-        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.POST,"/api/slot/**").injectOn(http);
-        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.PUT,"/api/slot/**").injectOn(http);
-        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.DELETE,"/api/slot/**").injectOn(http);
-        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.GET,"/api/department/**").injectOn(http);
-        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.POST,"/api/department/**").injectOn(http);
-        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.PUT,"/api/department/**").injectOn(http);
-        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.DELETE,"/api/department/**").injectOn(http);
-        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.GET,"/api/working/**").injectOn(http);
-        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.POST,"/api/working/**").injectOn(http);
-        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.PUT,"/api/working/**").injectOn(http);
-        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.DELETE,"/api/working/**").injectOn(http);
-        http.csrf(AbstractHttpConfigurer::disable)
-                .securityMatcher("/api/**")
-                .authorizeHttpRequests(req->req.anyRequest().authenticated())
-                .sessionManagement(sess->sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+
+        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.POST, "/api/auth/**", "/paypal/**", "/api/payment/**").injectOn(http);
+        PublicRoutes.PublicRoutesManager.publicRoutes().add(HttpMethod.GET, "/api/payment/**","/api/schedules/**" ).injectOn(http);
+        http.csrf(AbstractHttpConfigurer::disable).securityMatcher("/api/**")
+                .authorizeHttpRequests(request -> {
+                    request.requestMatchers("/api/slot/**").permitAll();
+                    request.requestMatchers("/api/department/**").permitAll();
+                    request.requestMatchers("/api/working/**").permitAll();
+                    request.requestMatchers("/api/qualification/**").permitAll();
+                    request.requestMatchers("/api/news/**").permitAll();
+                    request.requestMatchers("/api/feedback/**").permitAll();
+                    request.requestMatchers("/api/user/**").permitAll();
+                    request.requestMatchers("/api/doctor/**").permitAll();
+                    request.requestMatchers("/api/contact/**").permitAll();
+                    request.requestMatchers("/api/patient/**").permitAll();
+                    request.requestMatchers("/api/schedules/**").permitAll();
+                    request.requestMatchers("/api/appointment/**").permitAll();
+                    request.requestMatchers("/api/medical/**").permitAll();
+                    request.requestMatchers("/api/report/**").permitAll()
+                            .anyRequest().authenticated();
+                })
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(authenticationMiddleware, UsernamePasswordAuthenticationFilter.class)
                 .cors(configurer -> new CorsConfiguration().applyPermitDefaultValues());
         return http.build();

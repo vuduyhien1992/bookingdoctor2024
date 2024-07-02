@@ -30,9 +30,47 @@ nav {
     border-radius: 15px;
     text-decoration: none;
     color: #1d1617;
+    cursor: pointer;
     &:hover {
         background-color: #000af7;
         color: #fff;
         font-weight: 500;
+    }
+}
+
+.img__icon_login{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.icon_login{
+    position: relative;
+    .dropdown__user{
+        position: absolute;
+        right: 0px;
+        width: 200px;
+        background-color: #fff;
+        z-index: 10;
+        li{
+            padding: 10px 20px;
+            border-bottom: 1px solid #f2f2f2;
+            cursor: pointer;
+            &:hover{
+                background-color: #f2f2f2;
+            }
+            .user__link{
+                color: #3b3637;
+                font-size: 18px;
+                font-weight: 500;
+                text-decoration: none;
+                cursor: pointer;
+                &:hover{
+                    color: #000af7;
+                }
+            }
+        }
+
     }
 }

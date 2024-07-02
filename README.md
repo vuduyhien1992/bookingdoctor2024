@@ -1,71 +1,61 @@
--- Qui ước đặt tên
+Appointment Clinic
+--- Installation Instructions ---
 
-class 
+Step 1: Download the application at the github link below
+https://github.com/vuduyhien1992/bookingdoctor2024
 
-    1: product__card_name, product__card_title, product__card_star, product__card_price
-Ghi chú phần mình làm:
-// Khoa: Doctor: create 13/04/2024
-// Khoa: Doctor:  update,.... 13/04/2024
-// Khoa: Doctor: create, update,.... 13/04/2024
-// Khoa: Doctor: create, update,.... 13/04/2024
+Step 2: Create a database named: medicare_plus
 
+Step 3: Import data into the database from the downloaded file
 
-Báo cáo: 24h hằng ngày báo cáo lên group những phần mình làm
+----- START THE PROGRAM BACK END -----
+Step 4: Open the IntelliJ IDEA program using the backend-api folder located in the bookingdoctor2024 folder that you downloaded
 
-Tìm dữ liệu và xử lý image: 
-    Tìm dữ liệu: 
-        Doctor: An kiếm 14/04/2024 - 5 record mỗi khoa, đăng ký bằng gmail
-        Partient: Chương kiếm 14/04/2024
-        Image: Hiển xử lý( Hình xử lý Image: hình đại diện: 400x600 PNG ) 14/04/2024
-        Khoa xử lý insert database, Cấu trúc thư mục up lên github 15/04/2024
+Step 5: Customize the database connection in the application.properties file according to the path bookingdoctor2024\backend-api\src\main\resources
 
-Website:
-    // Hiển:
-        Doctor
-            1: Xem lich book
-            2: Tạo giờ khám ngày khám
-            3: Xem thông tin bệnh nhân
-            4: Quản lý account
+Step 6: Start the back end using the IntelliJ IDEA program
 
-    // Khoa:
-        Login, Sign-in
-        Partient
-            1: Quản lý account
-                - Profile
-                - Quản lý lịch book
-                - Quản lý feedback
-            2: Tìm kiếm
-            3: Doctor
-            4: DoctorDetail
-            5: Xem tin tức
-            6: Book lịch khám
-            7: Feedback
+----- START THE PROGRAM FRONT END PROGRAM -----
+Step 7: Open the VSCode program using the bookingdoctor_web folder located in the bookingdoctor2024 folder that you downloaded
 
-    // An - Chương: 
-        Admin: 
-            1: Quản lý User: An làm
-                - Thêm account doctor
-                - Thêm account admin1, admin2, admin3
-                - Partient: change status(isActive, )
-            2: Quản lý appointment: An làm
-            3: Quản lý doctor: An làm
-            4: Quản lý News: Chương
-                - Content: package quản lý content tin tức
-            5: Reports: An làm
-            6: Feedbacks Chương
-            7: Quản lý role: Chương
-            8: Quản lý Schedule: Chương
-            9: Quản lý partient:  Chương
-            10: Quản lý department: Chương
-                Khoa: Tai mũi họng
-                Khoa: Tim mạch
-                Khoa: Nhi
-                Khoa: Sản
-                Khoa: Răng - hàm - mặt
-                Khoa: Da liễu
-                Khoa: Mắt
-            11: Dashboard: An làm
-App: 
-    Partient: Khoa - An
+Step 8: Open Terminal and run the npm i command to install the missing plugins
 
-    Doctor: Hiển - Chương
+Step 9: Run the program using the command: npm run dev
+
+Step 10: Open the browser and type the link http://localhost:5173/ to use the program's functions
+
+NOW YOU CAN USE THE WEB FUNCTIONS WITH THE FOLLOWING ACCOUNTS:
+Admin: 0908111111
+Doctor: 0908222222
+User: 0908333333
+
+----- START THE MOBILE PROGRAM -----
+Step 11: Open the program Android Studio using the portable folder located in the bookingdoctor2024 folder that you downloaded
+
+Step 12: Open Terminal and run the flutter pub get command to update the necessary application packages
+
+Step 13: Open the Device Manager tab and open the virtual machine you installed
+
+Step 14: Open Terminal and run the flutter run command to run the program
+
+Step 15: Successfully boot
+
+Step 16: Log in to enter the application control screen
+
+\*NOTE: If you cannot run the application, please update Android Studio version 2023.2.1 Patch 1. Please update Dart SDK version 3.4.0 and install as follows:
+-> Select the File tab -> select Settings... (Ctrl+Alt+S)
+-> Select Languages ​​& Frameworks -> select Dart
+-> On the right screen, check the box Enable Dart Support for the project 'booking_app'
+-> In the Dart SDK path section: click ... select where you put the flutter folder (usually the path is ~\flutter\bin\cache\dart-sdk)
+-> In the Enable Dart Support for the following modules section, select Project 'booking_app', select 'mobile'
+-> Click Apply and OK and you're done
+
+If you can't log in, please open Windows PowerShell
+
+> enter the ipconfig command to get the ip
+> IPv4 address. . . . . . . . . . . . . : 192.168.1.2
+
+Copy the IP of Ipv4 instead of the IP in the file “ip_app.dart” in the folder “\bookingdoctor2024\mobile\lib\utils”
+
+ON BEHALF OF THE GROUP, THANK YOU
+WISH YOU SUCCESS IN LIFE

@@ -1,9 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import bg_login from '../../public/images/image-login.png';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const LoginGmail = () => {
+
+    const [username, setUsername] = useState('');
+    const provider ='gmail';
+    
+    const navigateTo  = useNavigate();
+
+
+    const handleSendOtp = async (event) => {
+        event.preventDefault()
+        const data = {
+            username: username,
+            provider: provider
+        }
+        console.log(username);
+        
+        try {
+
+
+            const result =  await axios.post('http://localhost:8080/api/auth/send-otp', data);              
+            if(result && result.data){
+                navigateTo(`/login-by-gmail-submit?username=${username}`);
+            }
+
+        } catch (error) {
+            console.error('Error sending OTP: ', error)
+        }
+    };
 
     return (
         <>
@@ -22,10 +50,14 @@ const LoginGmail = () => {
                                 <h5 className='login__title_sup'>Booking appointment</h5>
                                 <div className='py-5 border-top border-dark border-2 mt-3'>
                                 {/* <h5 className='mb-3 text-black-50'>Step 1: Nhập gmail để nhận mã xác thực</h5> */}
-                                    <form>
+                                    <form onClick={handleSendOtp}>
                                         <input type="hidden" name="provider" value="gmail" />
                                         <div className="mb-3">
-                                            <input type="gmail" className="input__username" id="input__phone" placeholder="Enter your gmail" />
+                                            <input type="gmail" className="input__username"
+                                             id="input__phone" placeholder="Enter your gmail"
+                                             value={username}
+                                             onChange={(e) => setUsername(e.target.value)}
+                                              />
                                         </div>
                                         <div className="mb-4">
                                             <motion.div whileTap={{ scale: 0.8 }}>

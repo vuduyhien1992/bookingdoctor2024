@@ -27,11 +27,25 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public List<DepartmentDto> findAll() {
+        List<Integer> departmentIdsWithDoctors = departmentRepository.findDepartmentIdsWithDoctors();
         List<Department> departments = departmentRepository.findAll();
+        for (Department department : departments) {
+            if (departmentIdsWithDoctors.contains(department.getId())) {
+                department.setStatus(true);
+            } else {
+                department.setStatus(false);
+            }
+            departmentRepository.save(department);
+        }
         return departments.stream().map(this::toDto)
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Optional<DepartmentDto> findBySlug(String id) {
+        Optional<Department> result = departmentRepository.findByUrl(id);
+        return result.map(this::toDto);
+    }
     @Override
     public Optional<DepartmentDto> findById(int id) {
         Optional<Department> result = departmentRepository.findById(id);
@@ -49,6 +63,20 @@ public class DepartmentServiceImpl implements DepartmentService {
     public boolean deleteById(int id) {
         try {
             departmentRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean changeStatus(int id, int status) {
+        Department d = departmentRepository.findById(id).get();
+        boolean newStatus = (status == 1) ? false : true;
+        d.setStatus(newStatus);
+        try {
+            departmentRepository.save(d);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
